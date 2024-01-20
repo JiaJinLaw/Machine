@@ -12,7 +12,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Add a background image using custom CSS
+# Add background image
 background_image_path = "R.jfif"
 st.image(background_image_path, use_column_width=True)  # Adjust 'use_column_width' based on your preference
 
@@ -23,9 +23,8 @@ st.write(
     "In the manufacturing industry, high operating expenditures and operational disruptions, such as machine failures, impact production costs and delivery times, leading to poor customer service."
 )
 
-st.title('Customize your target.')
+st.title('Customize your variables.')
 
-# Type selection
 type_options = ["Low", "Medium", "High"]
 selected_type = st.selectbox("Type of Product Quality Variant", options=type_options)
 
@@ -36,7 +35,7 @@ rotational_speed = st.number_input("Rotational Speed [rpm]", min_value=1000, max
 torque = st.number_input("Torque [Nm]", min_value=0, max_value=100, value=0, step=1)
 tool_wear = st.number_input("Tool Wear [min]", min_value=0, max_value=300, value=0, step=1)
 
-# Create a dictionary to hold the user input
+#input
 user_input = {
     "Type": selected_type,
     "Air Temperature": air_temperature,
@@ -46,7 +45,7 @@ user_input = {
     "Tool Wear": tool_wear,
 }
 
-# For demonstration purposes, let's assume a simple rule-based model
+#result simulation
 def predict_failure_type(user_input):
     tool_wear_threshold = 246
     torque_threshold = 60
@@ -61,7 +60,6 @@ def predict_failure_type(user_input):
     else:
         return "No Failure"
 
-# Get the predicted failure type
 predicted_failure_type = predict_failure_type(user_input)
 
 # Display the predicted failure type with red color if other than "No Failure"
@@ -70,5 +68,5 @@ if predicted_failure_type != "No Failure":
 else:
     color = "green"
     
-# Display the predicted failure type
+# result
 st.markdown(f"<h2 style='color: {color}'>Predicted Failure Type: {predicted_failure_type}</h2>", unsafe_allow_html=True)

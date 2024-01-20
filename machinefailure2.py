@@ -71,4 +71,4 @@ else:
     color = "black"
     
 # Display the predicted failure type
-st.markdown(f"## Predicted Failure Type: **{predicted_failure_type}**")
+st.markdown(f"<h2 style='color: {color}'>Predicted Failure Type: {predicted_failure_type}</h2>", unsafe_allow_html=True)

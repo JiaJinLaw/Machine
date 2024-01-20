@@ -29,27 +29,22 @@ st.title('Customize your target.')
 type_options = ["Low", "Medium", "High"]
 selected_type = st.selectbox("Type of Product Quality Variant", options=type_options)
 
-# Range selection using sliders
-air_temperature_range = st.slider("Air Temperature [K]", min_value=295, max_value=304, value=(295, 304), step=1)
-process_temperature_range = st.slider(
-    "Process Temperature [K]", min_value=300, max_value=320, value=(300, 320), step=1
-)
-rotational_speed_range = st.slider("Rotational Speed [rpm]", min_value=1000, max_value=3000, value=(1000, 3000), step=100)
-torque_range = st.slider("Torque [Nm]", min_value=0, max_value=100, value=(0, 100), step=1)
-tool_wear_range = st.slider("Tool Wear [min]", min_value=0, max_value=300, value=(0, 300), step=1)
+# Input specific values using number_input
+air_temperature = st.number_input("Air Temperature [K]", min_value=295, max_value=304, value=295, step=1)
+process_temperature = st.number_input("Process Temperature [K]", min_value=300, max_value=320, value=300, step=1)
+rotational_speed = st.number_input("Rotational Speed [rpm]", min_value=1000, max_value=3000, value=1000, step=100)
+torque = st.number_input("Torque [Nm]", min_value=0, max_value=100, value=0, step=1)
+tool_wear = st.number_input("Tool Wear [min]", min_value=0, max_value=300, value=0, step=1)
 
 # Create a dictionary to hold the user input
 user_input = {
     "Type": selected_type,
-    "Air Temperature": air_temperature_range,
-    "Process Temperature": process_temperature_range,
-    "Rotational Speed": rotational_speed_range,
-    "Torque": torque_range,
-    "Tool Wear": tool_wear_range,
+    "Air Temperature": air_temperature,
+    "Process Temperature": process_temperature,
+    "Rotational Speed": rotational_speed,
+    "Torque": torque,
+    "Tool Wear": tool_wear,
 }
-
-# Display the user input
-st.write("User Input:", user_input)
 
 # For demonstration purposes, let's assume a simple rule-based model
 def predict_failure_type(user_input):
@@ -57,13 +52,11 @@ def predict_failure_type(user_input):
     torque_threshold = 60
     air_temperature_threshold = 300
 
-    tool_wear = user_input["Tool Wear"][1]  # Assuming Tool Wear is the maximum value from the range
-
-    if tool_wear > tool_wear_threshold:
+    if user_input["Tool Wear"] > tool_wear_threshold:
         return "Tool wear failure"
-    elif user_input["Torque"][1] > torque_threshold:
+    elif user_input["Torque"] > torque_threshold:
         return "Power failure"
-    elif user_input["Air Temperature"][1] > air_temperature_threshold:
+    elif user_input["Air Temperature"] > air_temperature_threshold:
         return "Heat Dissipation failure"
     else:
         return "No Failure"
@@ -72,4 +65,4 @@ def predict_failure_type(user_input):
 predicted_failure_type = predict_failure_type(user_input)
 
 # Display the predicted failure type
-st.write(f"Predicted Failure Type: {predicted_failure_type}")
+st.markdown(f"## Predicted Failure Type: **{predicted_failure_type}**")

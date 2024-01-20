@@ -64,5 +64,11 @@ def predict_failure_type(user_input):
 # Get the predicted failure type
 predicted_failure_type = predict_failure_type(user_input)
 
+# Display the predicted failure type with red color if other than "No Failure"
+if predicted_failure_type != "No Failure":
+    color = "red"
+else:
+    color = "black"
+    
 # Display the predicted failure type
 st.markdown(f"## Predicted Failure Type: **{predicted_failure_type}**")

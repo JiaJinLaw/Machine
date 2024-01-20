@@ -68,7 +68,7 @@ predicted_failure_type = predict_failure_type(user_input)
 if predicted_failure_type != "No Failure":
     color = "red"
 else:
-    color = "black"
+    color = "green"
     
 # Display the predicted failure type
 st.markdown(f"<h2 style='color: {color}'>Predicted Failure Type: {predicted_failure_type}</h2>", unsafe_allow_html=True)
